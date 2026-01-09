@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_picking_form_replace_zip_button" model="ir.ui.view">
+            <field name="name">stock.picking.delivery.certificate.replace.zip.button</field>
+            <field name="model">stock.picking</field>
+
+            <!-- Vista original mostrada en la imagen -->
+            <field name="inherit_id"
+                   ref="oct_certificate_delivery.stock_picking_delivery_certificate"/>
+
+            <field name="arch" type="xml">
+
+                <!-- Añadimos SOLO el botón ZIP -->
+                <xpath expr="//button[@name='action_zip_certificates']" position="after">
+                    <button string="Certificado ZIP (grande)"
+                            type="action"
+                            class="btn-primary"
+                            name="%(ir_actions_server_sid_zip_certificates_delivery)d"
+                            attrs="{'invisible': ['|', ('certificate_needed', '=', False), ('certificate_issued', '=', True)]}"/>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- 1) Acción de servidor -->
+        <record id="ir_actions_server_sid_zip_certificates_delivery" model="ir.actions.server">
+            <field name="name">Generar Zip Gran Tamaño</field>
+            <field name="model_id" ref="model_sid_bonds_orders"/>
+            <field name="state">code</field>
+            <field name="code"><![CDATA[
+records.with_context(
+    min_free_mb=800,         # NO empieza si /tmp baja de 800MB libre
+    safety_margin_mb=10,     # margen para que zipfile cierre sin Errno 28
+).action_zip_certificates_all_parts(
+    cert_batch_size=8,       # máximo 8 certificados por parte
+    max_zip_mb=20            # parte objetivo 20MB (real suele cortar antes por margen)
+)
+      ]]></field>
+        </record>
+    </data>
+</odoo>
