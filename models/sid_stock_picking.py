@@ -29,9 +29,6 @@ except Exception:
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
 
-    certificate_needed = fields.Boolean(string='Certificado Obligatorio', default=False)
-    certificate_issued = fields.Boolean(string='Certificado Emitido', default=False)
-    certificate_add_watermark = fields.Boolean(string='Añadir Marca de agua?', default=True)
     document_attachment_id = fields.Many2one('ir.attachment', string='Adjunto')
 
     # =========================================================
