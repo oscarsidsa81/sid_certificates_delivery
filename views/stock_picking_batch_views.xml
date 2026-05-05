@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_picking_batch_form_certificates" model="ir.ui.view">
+        <field name="name">stock.picking.batch.form.certificates</field>
+        <field name="model">stock.picking.batch</field>
+        <field name="inherit_id" ref="stock_picking_batch.stock_picking_batch_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//group" position="inside">
+                <field name="certificate_add_watermark"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

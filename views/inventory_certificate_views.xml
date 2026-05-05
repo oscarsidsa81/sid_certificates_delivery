@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_inventory_certificate_search" model="ir.ui.view">
+        <field name="name">inventory.certificate.search</field>
+        <field name="model">inventory.certificate</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="fabricante"/>
+                <field name="lot_ids"/>
+                <filter name="draft" string="Pendiente subir" domain="[('state','=','draft')]"/>
+                <filter name="done" string="Validado" domain="[('state','=','done')]"/>
+                <filter name="receipt" string="Recepción" domain="[('type','=','receipt')]"/>
+                <filter name="delivery" string="Entrega" domain="[('type','=','delivery')]"/>
+                <group expand="0" string="Agrupar por">
+                    <filter string="Producto" name="group_product" context="{'group_by': 'product_id'}"/>
+                    <filter string="Fabricante" name="group_fabricante" context="{'group_by': 'fabricante'}"/>
+                    <filter string="Estado" name="group_state" context="{'group_by': 'state'}"/>
+                    <filter string="Tipo" name="group_type" context="{'group_by': 'type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_inventory_certificate_tree" model="ir.ui.view">
+        <field name="name">inventory.certificate.tree</field>
+        <field name="model">inventory.certificate</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="state"/>
+                <field name="product_id"/>
+                <field name="fabricante"/>
+                <field name="lot_ids" widget="many2many_tags"/>
+                <field name="quantity_received"/>
+                <field name="quantity_done"/>
+                <field name="quantity_certificate"/>
+                <field name="certificate_file_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_inventory_certificate_form" model="ir.ui.view">
+        <field name="name">inventory.certificate.form</field>
+        <field name="model">inventory.certificate</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_validate_certificate" string="Validar" type="object" class="oe_highlight" attrs="{'invisible': [('state','=','done')]}"/>
+                    <button name="action_reset_to_draft" string="A borrador" type="object" attrs="{'invisible': [('state','=','draft')]}"/>
+                    <button name="action_create_documents" string="Crear documento" type="object"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="type"/>
+                            <field name="product_id"/>
+                            <field name="fabricante"/>
+                            <field name="lot_ids" widget="many2many_tags"/>
+                            <field name="active"/>
+                        </group>
+                        <group>
+                            <field name="quantity_received" readonly="1"/>
+                            <field name="quantity_done" readonly="1"/>
+                            <field name="quantity_certificate" readonly="1"/>
+                            <field name="certificate_file" filename="certificate_file_name"/>
+                            <field name="certificate_file_name" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Lotes">
+                            <field name="certificate_lots" readonly="1">
+                                <tree>
+                                    <field name="lot_id"/>
+                                    <field name="product_id"/>
+                                    <field name="quantity_received"/>
+                                    <field name="quantity_done"/>
+                                    <field name="quantity_available"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Movimientos">
+                            <field name="certificate_moves">
+                                <tree editable="bottom">
+                                    <field name="move_line_id"/>
+                                    <field name="picking_id"/>
+                                    <field name="lot_id"/>
+                                    <field name="product_id"/>
+                                    <field name="fabricante"/>
+                                    <field name="qty"/>
+                                    <field name="type"/>
+                                    <field name="origin"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notas">
+                            <field name="note"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_inventory_certificate_line_tree" model="ir.ui.view">
+        <field name="name">inventory.certificate.line.tree</field>
+        <field name="model">inventory.certificate.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="certificate_id"/>
+                <field name="move_line_id"/>
+                <field name="picking_id"/>
+                <field name="lot_id"/>
+                <field name="product_id"/>
+                <field name="qty"/>
+                <field name="type"/>
+                <field name="origin"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_inventory_certificate_lot_tree" model="ir.ui.view">
+        <field name="name">inventory.certificate.lot.tree</field>
+        <field name="model">inventory.certificate.lot</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="certificate_id"/>
+                <field name="lot_id"/>
+                <field name="product_id"/>
+                <field name="quantity_received"/>
+                <field name="quantity_done"/>
+                <field name="quantity_available"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_inventory_certificate" model="ir.actions.act_window">
+        <field name="name">Certificados</field>
+        <field name="res_model">inventory.certificate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_inventory_certificate_search"/>
+    </record>
+    <record id="action_inventory_certificate_line" model="ir.actions.act_window">
+        <field name="name">Líneas de certificados</field>
+        <field name="res_model">inventory.certificate.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_inventory_certificate_lot" model="ir.actions.act_window">
+        <field name="name">Lotes de certificados</field>
+        <field name="res_model">inventory.certificate.lot</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_inventory_certificate_root" name="Certificados" parent="stock.menu_stock_root" sequence="90"/>
+    <menuitem id="menu_inventory_certificate" name="Certificados" parent="menu_inventory_certificate_root" action="action_inventory_certificate" sequence="10"/>
+    <menuitem id="menu_inventory_certificate_line" name="Líneas" parent="menu_inventory_certificate_root" action="action_inventory_certificate_line" sequence="20"/>
+    <menuitem id="menu_inventory_certificate_lot" name="Lotes" parent="menu_inventory_certificate_root" action="action_inventory_certificate_lot" sequence="30"/>
+</odoo>

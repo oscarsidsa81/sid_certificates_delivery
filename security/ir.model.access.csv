@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_inventory_certificate_user,inventory.certificate user,model_inventory_certificate,stock.group_stock_user,1,1,1,1
+access_inventory_certificate_line_user,inventory.certificate.line user,model_inventory_certificate_line,stock.group_stock_user,1,1,1,1
+access_inventory_certificate_lot_user,inventory.certificate.lot user,model_inventory_certificate_lot,stock.group_stock_user,1,1,1,1
+access_certificate_request_wizard_user,certificate.request_wizard user,model_certificate_request_wizard,stock.group_stock_user,1,1,1,1
+access_certificate_import_wizard_user,certificate.import.wizard user,model_certificate_import_wizard,stock.group_stock_user,1,1,1,1
+access_certificate_reception_request_wizard_user,certificate.reception.request_wizard user,model_certificate_reception_request_wizard,stock.group_stock_user,1,1,1,1

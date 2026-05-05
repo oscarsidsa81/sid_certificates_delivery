@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_sml_assign_certificate_id" model="ir.actions.server">
+        <field name="name">OV - Asigna CERT ID</field>
+        <field name="model_id" ref="stock.model_stock_move_line"/>
+        <field name="binding_model_id" ref="stock.model_stock_move_line"/>
+        <field name="state">code</field>
+        <field name="code">records.action_assign_certificate_id()</field>
+    </record>
+    <record id="action_sml_assign_certificate_id_alt" model="ir.actions.server">
+        <field name="name">OV - Asignar Certificate ID</field>
+        <field name="model_id" ref="stock.model_stock_move_line"/>
+        <field name="binding_model_id" ref="stock.model_stock_move_line"/>
+        <field name="state">code</field>
+        <field name="code">records.action_assign_certificate_id()</field>
+    </record>
+    <record id="action_sml_find_certificates_by_line" model="ir.actions.server">
+        <field name="name">OV - Encontrar Certificados por línea</field>
+        <field name="model_id" ref="stock.model_stock_move_line"/>
+        <field name="binding_model_id" ref="stock.model_stock_move_line"/>
+        <field name="state">code</field>
+        <field name="code">records.action_find_certificates_by_line()</field>
+    </record>
+    <record id="action_sml_create_certificates_for_all" model="ir.actions.server">
+        <field name="name">OV - Crear Certificados 1 para todos</field>
+        <field name="model_id" ref="stock.model_stock_move_line"/>
+        <field name="binding_model_id" ref="stock.model_stock_move_line"/>
+        <field name="state">code</field>
+        <field name="code">records.action_create_certificates_for_all()</field>
+    </record>
+    <record id="action_sml_certificate_only_moves" model="ir.actions.server">
+        <field name="name">OV - Certificados sólo en movimientos de certificado</field>
+        <field name="model_id" ref="stock.model_stock_move_line"/>
+        <field name="binding_model_id" ref="stock.model_stock_move_line"/>
+        <field name="state">code</field>
+        <field name="code">records.action_certificate_only_moves()</field>
+    </record>
+    <record id="action_sml_control_pdf_certificates" model="ir.actions.server">
+        <field name="name">OV - Control PDF Certificados</field>
+        <field name="model_id" ref="stock.model_stock_move_line"/>
+        <field name="binding_model_id" ref="stock.model_stock_move_line"/>
+        <field name="state">code</field>
+        <field name="code">records.action_control_certificate_pdf()</field>
+    </record>
+    <record id="action_inventory_certificate_create_documents" model="ir.actions.server">
+        <field name="name">OV - Certificados crea doc en Certificados Inventario</field>
+        <field name="model_id" ref="model_inventory_certificate"/>
+        <field name="binding_model_id" ref="model_inventory_certificate"/>
+        <field name="state">code</field>
+        <field name="code">records.action_create_documents()</field>
+    </record>
+</odoo>

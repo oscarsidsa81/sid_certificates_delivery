@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_certificate_request_wizard_form" model="ir.ui.view">
+        <field name="name">certificate.request_wizard.form</field>
+        <field name="model">certificate.request_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Marca de agua certificados">
+                <group>
+                    <field name="name"/>
+                    <field name="document_ids" widget="many2many_tags"/>
+                    <field name="image"/>
+                    <field name="max_width"/>
+                    <field name="max_height"/>
+                    <field name="position_x"/>
+                    <field name="position_y"/>
+                </group>
+                <footer>
+                    <button name="action_apply_watermark" type="object" string="Aplicar" class="btn-primary"/>
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_certificate_import_wizard_form" model="ir.ui.view">
+        <field name="name">certificate.import.wizard.form</field>
+        <field name="model">certificate.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Importar certificados">
+                <group>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="state"/>
+                    <field name="attachment_ids" widget="many2many_binary"/>
+                </group>
+                <footer>
+                    <button name="action_import_certificates" type="object" string="Importar" class="btn-primary"/>
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_certificate_reception_request_wizard_form" model="ir.ui.view">
+        <field name="name">view_add_certificate_reception</field>
+        <field name="model">certificate.reception.request_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Asignar certificado">
+                <group>
+                    <field name="name"/>
+                    <field name="certificate_id"/>
+                </group>
+                <footer>
+                    <button name="action_assign_to_active_move_lines" type="object" string="Asignar" class="btn-primary"/>
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_certificate_import_wizard" model="ir.actions.act_window">
+        <field name="name">Importar certificados</field>
+        <field name="res_model">certificate.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+    <record id="action_certificate_reception_request_wizard" model="ir.actions.act_window">
+        <field name="name">Asignar certificado</field>
+        <field name="res_model">certificate.reception.request_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_certificate_import_wizard" name="Importar certificados" parent="menu_inventory_certificate_root" action="action_certificate_import_wizard" sequence="50"/>
+</odoo>

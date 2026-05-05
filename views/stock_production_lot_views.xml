@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_stock_production_lot_form_certificates" model="ir.ui.view">
+        <field name="name">stock.production.lot.form.certificates</field>
+        <field name="model">stock.production.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Certificados">
+                    <field name="certificate_ids">
+                        <tree>
+                            <field name="certificate_id"/>
+                            <field name="quantity_received"/>
+                            <field name="quantity_done"/>
+                            <field name="quantity_available"/>
+                        </tree>
+                    </field>
+                    <field name="certificate_quantity_ids" widget="many2many_tags"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

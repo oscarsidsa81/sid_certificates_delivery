@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_picking_form_certificates" model="ir.ui.view">
+        <field name="name">stock.picking.form.certificates</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet//div[@name='button_box']" position="inside">
+                <button name="action_view_certificates" type="object" class="oe_stat_button" icon="fa-file-pdf-o">
+                    <field name="certificate_count" widget="statinfo" string="Certificados"/>
+                </button>
+            </xpath>
+            <xpath expr="//sheet//group" position="inside">
+                <group string="Certificados">
+                    <field name="certificate_needed"/>
+                    <field name="certificate_needed_in"/>
+                    <field name="certificate_issued"/>
+                    <field name="certificate_add_watermark"/>
+                    <field name="is_certificate_picking" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
